@@ -1,5 +1,7 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
+using System;
+using System.Collections.Generic;
 using Users;
 
 namespace UserTesting
