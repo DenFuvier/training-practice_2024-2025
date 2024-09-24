@@ -34,27 +34,36 @@ namespace UserTesting
 
         }
 
+        /// REVIEW. a.boikov. 25.09.2024. Метод может выдать исключение. Лучше, чтобы он возвращал bool,
+        /// а его результат можно проверить в тесте
         public void Delete()
         {
+            /// REVIEW. a.boikov. 25.09.2024. Эти настройки соединения лучше вынести в отдельный класс
+            /// который бы содержал отдельные данные по хост, userid, password и database.
+            /// Есть метод там, который возвращает строку соединения на основе этих данных.
+            /// Используем его здесь и во всех других частях библиотеки классов, т.е. он становится полноценным
+            /// классом самой библиотеки.
             string cs = @"server=localhost;userid=DenFuvier;password=N1PGKt1mT3UAlRRa;database=boyk";
             try
             {
                 var con = new MySqlConnection(cs);
                 con.Open();
 
-
+                /// REVIEW. a.boikov. 25.09.2024. Не нужны такие большие пробелы в коде между командами
 
                 string stm = String.Format("DELETE FROM users");
 
 
                 var cmd = new MySqlCommand(stm, con);
-                MySqlDataReader Reader = cmd.ExecuteReader();
+
+                /// REVIEW. a.boikov. 25.09.2024. Объект никак не используется. Можно смело удалить
+                MySqlDataReader Reader = cmd.ExecuteReader(); 
 
                 con.Close();
             }
             catch (Exception Exept)
             {
-
+                /// REVIEW. a.boikov. 25.09.2024. Не нужны такие большие пробелы в коде между командами
                 Console.WriteLine(Exept.Message);
 
             }

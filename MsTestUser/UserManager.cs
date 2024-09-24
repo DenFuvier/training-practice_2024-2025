@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Xml.Linq;
 using MySql.Data.MySqlClient;
 
 namespace Users
@@ -9,6 +7,7 @@ namespace Users
     public class UserManager
     {
 
+        /// REVIEW. a.boikov. 25.09.2024. Не нужны такие большие пробелы в коде
         public void Add(User u)
         {
 
@@ -16,7 +15,8 @@ namespace Users
 
         public bool Write(List<User> users)
         {
-
+            /// REVIEW. a.boikov. 25.09.2024. Повторение. См. комментарий, что оставил по этому поводу
+            /// в методе Delete тестов.
             string cs = @"server=localhost;userid=DenFuvier;password=N1PGKt1mT3UAlRRa;database=boyk";
             try
             {
@@ -32,7 +32,7 @@ namespace Users
                         int password = user.Password;
 
 
-
+                        /// REVIEW. a.boikov. 25.09.2024. Не нужны такие большие пробелы в коде
 
                         var stm = String.Format("INSERT INTO users (login, name, surname, password) VALUES ('{0}', '{1}', '{2}', '{3}')",
                                                  login, name, surname, password);
@@ -55,8 +55,11 @@ namespace Users
 
         public List<User> ReadAll()
         {
+            /// REVIEW. a.boikov. 25.09.2024. переменные называются с малекой буквой в camelCase
             List<User> Users = new List<User>();
 
+            /// REVIEW. a.boikov. 25.09.2024. Повторение. См. комментарий, что оставил по этому поводу
+            /// в методе Delete тестов.
             string cs = @"server=localhost;userid=DenFuvier;password=N1PGKt1mT3UAlRRa;database=boyk";
             try
             {
