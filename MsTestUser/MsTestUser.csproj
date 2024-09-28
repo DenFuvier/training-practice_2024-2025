@@ -93,9 +93,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connect.cs" />
-    <Compile Include="UserManager.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="ConnectSQL\Connect.cs" />
+    <Compile Include="UserData\UserManager.cs" />
+    <Compile Include="UserData\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

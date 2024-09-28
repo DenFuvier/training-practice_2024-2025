@@ -40,10 +40,10 @@ namespace Users
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;
+              Console.WriteLine(ex.Message);
+              return false;
             }
-            return true;
+             return true;
         }
 
         public List<User> ReadAll()
@@ -53,37 +53,26 @@ namespace Users
             string cs = M.GetConnect();
             try
             {
-
                 var con = new MySqlConnection(cs);
-
                 con.Open();
-
                 var stm = String.Format("SELECT Name, Surname , password , login FROM users");
-
                 var cmd = new MySqlCommand(stm, con);
                 MySqlDataReader Reader = cmd.ExecuteReader();
                 while (Reader.Read())
                 {
-
                     string name = Reader.GetString(0);
                     string surname = Reader.GetString(1);
                     int password = Reader.GetInt32(2);
                     string login = Reader.GetString(3);
                     Users.Add(new User { Name = name, Surname = surname, Login = login, Password = password });
-
                 }
-
             }
             catch (Exception Exept)
             {
-
-
                 Console.WriteLine(Exept.Message);
                 return new List<User>();
-
             }
             return Users;
-
         }
     }
 }
