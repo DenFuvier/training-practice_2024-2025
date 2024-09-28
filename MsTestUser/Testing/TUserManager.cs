@@ -6,74 +6,61 @@ using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using Users;
+namespace UserTesting;
 
-namespace UserTesting
+[TestClass]
+public class TUserManager
 {
-    [TestClass]
-    public class TUserManager
+
+    [TestMethod]
+    public void TestWrite()
     {
+        Delete();
 
-        [TestMethod]
-        public void TestWrite()
+        UserManager userManager = new UserManager();
+        List<User> expectedUsers = new List<User>() { new User() {Login = "abc", Password = 2234, Name = "Vasya" , Surname = "OPDFGHJ" },
+                                              new User() {Login = "cbd", Password = 43554, Name = "Petya" , Surname = "POIUY" }};
+
+        bool success = userManager.Write(expectedUsers);
+        Assert.IsTrue(success);
+        List<User> actualUsers = userManager.ReadAll();
+        Assert.AreEqual(expectedUsers.Count, actualUsers.Count);
+
+
+        for (int i = 0; i < expectedUsers.Count; i++)
         {
-            useConnect X = new useConnect();
-            X.Delete();
-            UserManager userManager = new UserManager();
-            List<User> expectedUsers = new List<User>() { new User() {Login = "abc", Password = 2234, Name = "Vasya" , Surname = "OPDFGHJ" },
-                                                  new User() {Login = "cbd", Password = 43554, Name = "Petya" , Surname = "POIUY" }};
+            User exp = expectedUsers[i];
+            User Act = actualUsers[i];
 
-            bool success = userManager.Write(expectedUsers);
-            Assert.IsTrue(success);
-            List<User> actualUsers = userManager.ReadAll();
-            expectedUsers.Sort(delegate (User x, User y)
-            {
-                return x.Login.CompareTo(y.Login);
-
-            });
-            Assert.AreEqual(expectedUsers.Count, actualUsers.Count);
-            CollectionAssert.AreEqual(expectedUsers, actualUsers, Convert.ToString(expectedUsers[0].Password));
-
+            Assert.AreEqual(exp.Login, Act.Login);
+            Assert.AreEqual(exp.Password, Act.Password);
+            Assert.AreEqual(exp.Surname, Act.Surname);
+            Assert.AreEqual(exp.Name, Act.Name);
         }
 
-        public class ConnectSettings
-        {
-            public string server = "localhost";
-            public string userid = "u2839668_DenFuv";
-            public string password = "N1PGKt1mT3UAlRRa";
-            public string database = "u2839668_boyk";
+    }
 
-            public string GetConnect()
+   
+        
+        public bool Delete()
+        {
+            ConnectSettings M = new ConnectSettings();
+            string cs = M.GetConnect();
+            try
             {
-                return $"server={server};userid={userid};password={password};database={database}";
+                var con = new MySqlConnection(cs);
+                con.Open();
+                string stm = "DELETE FROM users";
+                var cmd = new MySqlCommand(stm, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
             }
-        }
-        public class useConnect
-        {
-            private ConnectSettings _Con = new ConnectSettings();
-            public bool Delete()
+            catch (Exception Exept)
             {
-
-                /// REVIEW. a.boikov. 25.09.2024. Ёти настройки соединени€ лучше вынести в отдельный класс
-                /// который бы содержал отдельные данные по хост, userid, password и database.
-                /// ≈сть метод там, который возвращает строку соединени€ на основе этих данных.
-                /// »спользуем его здесь и во всех других част€х библиотеки классов, т.е. он становитс€ полноценным
-                /// классом самой библиотеки.
-                string cs = _Con.GetConnect();
-                try
-                {
-                    var con = new MySqlConnection(cs);
-                    con.Open();
-                    string stm = String.Format("DELETE FROM users");
-                    var cmd = new MySqlCommand(stm, con);
-                    con.Close();
-                }
-                catch (Exception Exept)
-                {
-                    Console.WriteLine(Exept.Message);
-                }
+                Console.WriteLine(Exept.Message);
                 return false;
             }
+            return true;
         }
-    }
 }
 ///1edwaqr
