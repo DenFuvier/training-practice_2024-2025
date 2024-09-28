@@ -1,5 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
+using Mysqlx.Resultset;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using Users;
@@ -20,55 +23,56 @@ namespace UserTesting
 
             bool success = userManager.Write(expectedUsers);
             Assert.IsTrue(success);
-
             List<User> actualUsers = userManager.ReadAll();
             expectedUsers.Sort(delegate (User x, User y)
             {
                 return x.Login.CompareTo(y.Login);
 
             });
-
-
             Assert.AreEqual(expectedUsers.Count, actualUsers.Count);
             CollectionAssert.AreEqual(expectedUsers, actualUsers, Convert.ToString(expectedUsers[0].Password));
 
         }
 
-        /// REVIEW. a.boikov. 25.09.2024. Метод может выдать исключение. Лучше, чтобы он возвращал bool,
-        /// а его результат можно проверить в тесте
-        public void Delete()
+        public class Connect
         {
-            /// REVIEW. a.boikov. 25.09.2024. Эти настройки соединения лучше вынести в отдельный класс
-            /// который бы содержал отдельные данные по хост, userid, password и database.
-            /// Есть метод там, который возвращает строку соединения на основе этих данных.
-            /// Используем его здесь и во всех других частях библиотеки классов, т.е. он становится полноценным
-            /// классом самой библиотеки.
-            string cs = @"server=localhost;userid=DenFuvier;password=N1PGKt1mT3UAlRRa;database=boyk";
-            try
+            public string server = "localhost";
+            public string userid = "DenFuvier";
+            public string password = "N1PGKt1mT3UAlRRa";
+            public string database = "boyk";
+
+            public string GetConnect()
             {
-                var con = new MySqlConnection(cs);
-                con.Open();
-
-                /// REVIEW. a.boikov. 25.09.2024. Не нужны такие большие пробелы в коде между командами
-
-                string stm = String.Format("DELETE FROM users");
-
-
-                var cmd = new MySqlCommand(stm, con);
-
-                /// REVIEW. a.boikov. 25.09.2024. Объект никак не используется. Можно смело удалить
-                MySqlDataReader Reader = cmd.ExecuteReader(); 
-
-                con.Close();
+                return $"server={server};userid={userid};password={password};database={database}";
             }
-            catch (Exception Exept)
+        }
+        public class useConnect
+        {
+            private Connect _Con = new Connect();
+            public bool Delete()
             {
-                /// REVIEW. a.boikov. 25.09.2024. Не нужны такие большие пробелы в коде между командами
-                Console.WriteLine(Exept.Message);
 
+                /// REVIEW. a.boikov. 25.09.2024. Эти настройки соединения лучше вынести в отдельный класс
+                /// который бы содержал отдельные данные по хост, userid, password и database.
+                /// Есть метод там, который возвращает строку соединения на основе этих данных.
+                /// Используем его здесь и во всех других частях библиотеки классов, т.е. он становится полноценным
+                /// классом самой библиотеки.
+                string cs = _Con.GetConnect();
+                try
+                {
+                    var con = new MySqlConnection(cs);
+                    con.Open();
+                    string stm = String.Format("DELETE FROM users");
+                    var cmd = new MySqlCommand(stm, con);
+                    con.Close();
+                }
+                catch (Exception Exept)
+                {
+                    Console.WriteLine(Exept.Message);
+                }
+                return false;
             }
         }
     }
-
 }
 ///1edwaqr
