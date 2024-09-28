@@ -37,7 +37,7 @@ namespace UserTesting
         public class Connect
         {
             public string server = "localhost";
-            public string userid = "DenFuvier";
+            public string userid = "u2839668_DenFuv";
             public string password = "N1PGKt1mT3UAlRRa";
             public string database = "boyk";
 
