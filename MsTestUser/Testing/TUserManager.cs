@@ -16,7 +16,8 @@ namespace UserTesting
         [TestMethod]
         public void TestWrite()
         {
-            Delete();
+            useConnect X = new useConnect();
+            X.Delete();
             UserManager userManager = new UserManager();
             List<User> expectedUsers = new List<User>() { new User() {Login = "abc", Password = 2234, Name = "Vasya" , Surname = "OPDFGHJ" },
                                                   new User() {Login = "cbd", Password = 43554, Name = "Petya" , Surname = "POIUY" }};
@@ -34,12 +35,12 @@ namespace UserTesting
 
         }
 
-        public class Connect
+        public class ConnectSettings
         {
             public string server = "localhost";
             public string userid = "u2839668_DenFuv";
             public string password = "N1PGKt1mT3UAlRRa";
-            public string database = "boyk";
+            public string database = "u2839668_boyk";
 
             public string GetConnect()
             {
@@ -48,7 +49,7 @@ namespace UserTesting
         }
         public class useConnect
         {
-            private Connect _Con = new Connect();
+            private ConnectSettings _Con = new ConnectSettings();
             public bool Delete()
             {
 
