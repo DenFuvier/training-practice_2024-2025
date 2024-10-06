@@ -3,10 +3,14 @@ using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using Mysqlx.Resultset;
 using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Tls;
 using System;
 using System.Collections.Generic;
 using Users;
-namespace UserTesting;
+
+
+
+namespace Testing.TestClasses;
 
 [TestClass]
 public class TUserManager
@@ -15,9 +19,9 @@ public class TUserManager
     [TestMethod]
     public void TestWrite()
     {
-        Delete();
 
         UserManager userManager = new UserManager();
+        userManager.Delete();
         List<User> expectedUsers = new List<User>() { new User() {Login = "abc", Password = 2234, Name = "Vasya" , Surname = "OPDFGHJ" },
                                               new User() {Login = "cbd", Password = 43554, Name = "Petya" , Surname = "POIUY" }};
 
@@ -39,28 +43,5 @@ public class TUserManager
         }
 
     }
-
-   
-        
-        public bool Delete()
-        {
-            ConnectSettings M = new ConnectSettings();
-            string cs = M.GetConnect();
-            try
-            {
-                var con = new MySqlConnection(cs);
-                con.Open();
-                string stm = "DELETE FROM users";
-                var cmd = new MySqlCommand(stm, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception Exept)
-            {
-                Console.WriteLine(Exept.Message);
-                return false;
-            }
-            return true;
-        }
 }
 ///1edwaqr

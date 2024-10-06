@@ -1,14 +1,31 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+using Users;
 
 namespace Users
 {
     public class UserManager
     {
-        public void Add(User u)
+        public bool Delete()
         {
-
+            ConnectSettings M = new ConnectSettings();
+            string cs = M.GetConnect();
+            try
+            {
+                var con = new MySqlConnection(cs);
+                con.Open();
+                string stm = "DELETE FROM users";
+                var cmd = new MySqlCommand(stm, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception Exept)
+            {
+                Console.WriteLine(Exept.Message);
+                return false;
+            }
+            return true;
         }
         public bool Write(List<User> users)
         {
@@ -40,10 +57,10 @@ namespace Users
             }
             catch (Exception ex)
             {
-              Console.WriteLine(ex.Message);
-              return false;
+                Console.WriteLine(ex.Message);
+                return false;
             }
-             return true;
+            return true;
         }
 
         public List<User> ReadAll()
@@ -74,5 +91,35 @@ namespace Users
             }
             return Users;
         }
+        public bool Avtorizate(string Login, string Password)
+        {
+            ConnectSettings M = new ConnectSettings();
+            string cs = M.GetConnect();
+            try
+            {
+                using (var con = new MySqlConnection(cs))
+                {
+                    con.Open();
+                    string stm = $"SELECT Login, Password FROM users WHERE Login = '{Login}' AND Password = '{Password}'";
+                    using (var cmd = new MySqlCommand(stm, con))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            return reader.HasRows;
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+           
+        }
+
     }
+
+
 }
