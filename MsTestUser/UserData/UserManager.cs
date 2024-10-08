@@ -98,18 +98,12 @@ namespace Users
             {
                 /// REVIEW. a.boikov. 2024/10/08. Необходимо объяснить использование и необходимость использования using здесь
                 /// и ниже
-                using (var con = new MySqlConnection(cs))
-                {
-                    con.Open();
-                    string stm = $"SELECT Login, Password FROM users WHERE Login = '{Login}' AND Password = '{Password}'";
-                    using (var cmd = new MySqlCommand(stm, con))
-                    { 
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            return reader.HasRows;
-                        }
-                    }
-                }
+                var con = new MySqlConnection(cs);
+                con.Open();
+                string stm = $"SELECT Login, Password FROM users WHERE Login = '{Login}' AND Password = '{Password}'";
+                var cmd = new MySqlCommand(stm, con);
+                var reader = cmd.ExecuteReader();
+                return reader.HasRows;
                 
             }
             catch (Exception ex)
@@ -117,7 +111,6 @@ namespace Users
                 Console.WriteLine(ex.Message);
                 return false;
             }
-
         }
 
     }
