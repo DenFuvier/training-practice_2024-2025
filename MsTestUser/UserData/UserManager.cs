@@ -90,7 +90,7 @@ namespace Users
             }
             return Users;
         }
-        public bool Avtorizate(string Login, string Password)
+        public bool Authorization(string Login, string Password)
         {
             ConnectSettings M = new ConnectSettings();
             string cs = M.GetConnect();
