@@ -1,10 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
-using Mysqlx.Resultset;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Tls;
-using System;
 using System.Collections.Generic;
 using Users;
 

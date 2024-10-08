@@ -16,12 +16,14 @@ public class TestAvtorization
     [DataRow("Boyk", "987654", true)]
     [DataRow("ArictT", "boller", false)]
     [DataRow("Pabel", "ModedGun", false)]
+    /// REVIEW. a.boikov. 2024/10/08. Не хватает кейса, где указан верный логин, но неправильный пароль
     [TestMethod]
     public void TestUserAvtorizate(string Login, string Password, bool expected)
     {
         UserManager userManager = new UserManager();
         userManager.Delete();
         userManager.Write(testUsers_);
+        /// REVIEW. a.boikov. 2024/10/08. Avtorizate -> Authorization .. Следовательно и файл тоже
         bool Actual = userManager.Avtorizate(Login, Password);
         Assert.AreEqual(expected, Actual);
 
