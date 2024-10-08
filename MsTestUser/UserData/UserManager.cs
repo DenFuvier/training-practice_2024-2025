@@ -96,8 +96,6 @@ namespace Users
             string cs = M.GetConnect();
             try
             {
-                /// REVIEW. a.boikov. 2024/10/08. Необходимо объяснить использование и необходимость использования using здесь
-                /// и ниже
                 var con = new MySqlConnection(cs);
                 con.Open();
                 string stm = $"SELECT Login, Password FROM users WHERE Login = '{Login}' AND Password = '{Password}'";
