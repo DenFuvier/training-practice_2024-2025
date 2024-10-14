@@ -64,6 +64,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
@@ -82,6 +83,7 @@
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,6 +96,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectSQL\Connect.cs" />
+    <Compile Include="MVP\Models\InfoUsersModel.cs" />
+    <Compile Include="MVP\Models\IUserModel.cs" />
+    <Compile Include="MVP\Presenters\UserPresenter.cs" />
+    <Compile Include="MVP\UserForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVP\UserForms.Designer.cs">
+      <DependentUpon>UserForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVP\Views\IUsersView.cs" />
     <Compile Include="UserData\UserManager.cs" />
     <Compile Include="UserData\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,5 +115,6 @@
     <None Include="Others\packages.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

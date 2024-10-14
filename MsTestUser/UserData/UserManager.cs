@@ -52,7 +52,6 @@ namespace Users
                     }
                     con.Close();
                 }
-
             }
             catch (Exception ex)
             {
@@ -102,7 +101,6 @@ namespace Users
                 var cmd = new MySqlCommand(stm, con);
                 var reader = cmd.ExecuteReader();
                 return reader.HasRows;
-                
             }
             catch (Exception ex)
             {
@@ -110,8 +108,5 @@ namespace Users
                 return false;
             }
         }
-
     }
-
-
 }
