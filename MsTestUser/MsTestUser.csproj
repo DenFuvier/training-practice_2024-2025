@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectSQL\Connect.cs" />
-    <Compile Include="MVP\Models\InfoUsersModel.cs" />
     <Compile Include="MVP\Models\IUserModel.cs" />
     <Compile Include="MVP\Presenters\UserPresenter.cs" />
     <Compile Include="MVP\UserForms.cs">
