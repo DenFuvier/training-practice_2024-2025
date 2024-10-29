@@ -1,10 +1,6 @@
 ﻿using MsTestUser.MVP.Models;
-using MsTestUser.MVP.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MsTestUser.MVP.Views;                     
+using System.Collections.Generic; 
 using Users;
 
 namespace MsTestUser.MVP.Presenters
@@ -14,6 +10,8 @@ namespace MsTestUser.MVP.Presenters
         private IUserModel _model;
         private IUsersView _view;
 
+
+        /// REVIEW. a.boikov. 2014/10/29. Вспомнить, что за метод, как называется, когда вызывается
         public UserPresenter(IUserModel model, IUsersView view)
         {
             _model = model;

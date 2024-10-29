@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Users;
 
 namespace MsTestUser.MVP.Models
 {
     public class InfoUsersModel : IUserModel
     {
+        /// <summary>
+        ///  REVIEW. a.boikov. 2024/10/29. определить данные простой модели
+        /// </summary>
         private List<User> users_ = new List<User>();
         public InfoUsersModel()
         {
