@@ -99,12 +99,6 @@
     <Compile Include="MVP\Models\InfoUserModel.cs" />
     <Compile Include="MVP\Models\IUserModel.cs" />
     <Compile Include="MVP\Presenters\UserPresenter.cs" />
-    <Compile Include="MVP\UserForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MVP\UserForms.Designer.cs">
-      <DependentUpon>UserForms.cs</DependentUpon>
-    </Compile>
     <Compile Include="MVP\Views\IUsersView.cs" />
     <Compile Include="UserData\UserManager.cs" />
     <Compile Include="UserData\User.cs" />
