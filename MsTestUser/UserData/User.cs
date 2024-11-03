@@ -4,6 +4,7 @@ namespace Users
 {
     public class User
     {
+        public int id { get; set; }
         public string Login { get; set; }
 
         public int Password { get; set; }
