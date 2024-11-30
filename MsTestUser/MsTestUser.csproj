@@ -99,6 +99,7 @@
     <Compile Include="MVP\Models\InfoUserModel.cs" />
     <Compile Include="MVP\Models\IUserModel.cs" />
     <Compile Include="MVP\Presenters\UserPresenter.cs" />
+    <Compile Include="MVP\Views\FileUsersView.cs" />
     <Compile Include="MVP\Views\IUsersView.cs" />
     <Compile Include="UserData\UserManager.cs" />
     <Compile Include="UserData\User.cs" />

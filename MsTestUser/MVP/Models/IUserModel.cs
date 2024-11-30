@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Users;
 
 namespace MsTestUser.MVP.Models
@@ -10,5 +11,6 @@ namespace MsTestUser.MVP.Models
         /// </summary>
         /// <returns>список с минформацией о клиентах</returns>
         List<User> GetUsers();
+        event Action UpdateUserInfo;
     }
 }

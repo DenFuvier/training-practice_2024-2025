@@ -7,26 +7,27 @@ namespace MsTestUser.MVP.Presenters
 {
     public class UserPresenter
     {
-        private IUserModel _model;
-        private IUsersView _view;
+        private IUserModel model_;
+        private IUsersView view_;
 
 
-        // REVIEW. a.boikov. 2014/10/29. Вспомнить, что за метод, как называется, когда вызывается
-        // Конструктор инициализирует UserPresenter, устанавливая модель (_model) и представление (_view), чтобы дать презентеру доступ к данным и способ показать их пользователю.
-        //Когда вызывается :
-        //Конструктор UserPresenter вызывается при создании экземпляра презентера.Это происходит обычно в момент инициализации представления(View), когда необходимо установить связь между пользовательским интерфейсом и логикой приложения.
-        //Например, когда загружается окно или страница, требующая отображения данных
+        // REVIEW. a.boikov. 2014/10/29. Вспомнить, что за метод, как называется, когда вызываетсяa
         public UserPresenter(IUserModel model, IUsersView view)
         {
-            _model = model;
-            _view = view;
+            model_ = model;
+            view_ = view;
+            model_.UpdateUserInfo += model__UpdateUserInfo;
         }
 
-        public void LoadUsers()
+        public void model__UpdateUserInfo()
         {
-            List<User> users = _model.GetUsers();
-            _view.DisplayUsers(users);
+            List<User> UUser = model_.GetUsers();
+            view_.DisplayUsers(UUser);
         }
+        /// <summary>
+        ///  Модель ниже
+        /// </summary>
+
     }
 
 }

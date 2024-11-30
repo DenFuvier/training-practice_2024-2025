@@ -1,4 +1,5 @@
 ﻿using MySqlX.XDevAPI;
+using System;
 using System.Collections.Generic;
 using Users;
 
@@ -52,16 +53,18 @@ namespace MsTestUser.MVP.Models
                 Surname = "TestUsers"
             });
 
+            UpdateUserInfo?.Invoke();
         }
 
         /// <summary>
         /// Метод для получения списка пользователей.
         /// </summary>
         /// <returns>Список пользователей.</returns>
-        public List<User> GetUsers()
+        public override List<User> GetUsers()
         {
             // вернуть всех пользователей.
             return users_;
         }
+        public event Action UpdateUserInfo;
     }
 }
